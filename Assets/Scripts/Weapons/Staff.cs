@@ -1,26 +1,33 @@
+using System.Collections;
 using UnityEngine;
 
 public class Staff : MonoBehaviour, IWeapon
 {
     [SerializeField] WeaponInfo WeaponInfo;
+    [SerializeField] GameObject MagicLazer;
+    [SerializeField] Transform MagicLazerSpawnPoint;
+    Animator animator;
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         MouseFollowWithOnset();
     }
     public void Attack()
     {
-        Debug.Log("Staff Attack");
+        animator.SetTrigger("Attack");
         ActiveWeapon.Instance.AttackCooldown();
     }
     public WeaponInfo GetWeaponInfo()
     {
         return WeaponInfo;
+    }
+    public void SpawnStaffProjectileAnimation()
+    {
+        GameObject laser = Instantiate(MagicLazer, MagicLazerSpawnPoint.position, Quaternion.identity);
+        laser.GetComponent<MagicLazer>().UpdateLaserRange(WeaponInfo.weaponRange);
     }
     void MouseFollowWithOnset()
     {

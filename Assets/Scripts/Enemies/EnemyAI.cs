@@ -13,11 +13,13 @@ public class EnemyAI : MonoBehaviour
     EnemyState state;
     EnemyPathfinding pathfinding;
     Knockback knockback;
+    Animator animator;
     void Awake()
     {
         pathfinding = GetComponent<EnemyPathfinding>();
         state = EnemyState.Roaming;
         knockback = GetComponent<Knockback>();
+        animator = GetComponent<Animator>();
     }
     void Start()
     {
@@ -29,8 +31,10 @@ public class EnemyAI : MonoBehaviour
         {
             Vector2 roamingDirection = GetRoamingDirection();
             pathfinding.MoveDirection(roamingDirection);
+            animator.SetBool("IsMoving", true);
             yield return new WaitForSeconds(roamMoveTime);
             pathfinding.MoveDirection(new Vector2(0,0));
+            animator.SetBool("IsMoving", false);
             yield return new WaitForSeconds(roamWaitTime);
 
         }

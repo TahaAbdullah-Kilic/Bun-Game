@@ -7,10 +7,12 @@ public class EnemyPathfinding : MonoBehaviour
     Rigidbody2D rigidBody;
     Vector2 moveDirection;
     Knockback knockback;
+    SpriteRenderer spriteRenderer;
     void Awake()
     {
         knockback = GetComponent<Knockback>();
         rigidBody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     void FixedUpdate()
     {
@@ -20,5 +22,7 @@ public class EnemyPathfinding : MonoBehaviour
     public void MoveDirection(Vector2 newDirection)
     {
         moveDirection = newDirection;
+        if(moveDirection.x < 0) spriteRenderer.flipX = true;
+        else spriteRenderer.flipX = false;
     }
 }

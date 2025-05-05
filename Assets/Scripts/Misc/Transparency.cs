@@ -47,7 +47,7 @@ public class Transparency : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator FadeRoutine(Tilemap til, float fadeTime, float startValue, float targetTransparency)
+    IEnumerator FadeRoutine(Tilemap tileMap, float fadeTime, float startValue, float targetTransparency)
     {
         float elapsedTime = 0;
         while (elapsedTime <= fadeTime)

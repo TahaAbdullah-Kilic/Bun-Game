@@ -22,7 +22,7 @@ public class ActiveWeapon : Singleton<ActiveWeapon>
     }
     void Attack()
     {
-        if(cooldown == false) (CurrentActiveWeapon as IWeapon).Attack();
+        if(cooldown == false && CurrentActiveWeapon) (CurrentActiveWeapon as IWeapon).Attack();
         
     }
     IEnumerator AttackCDRoutine()
