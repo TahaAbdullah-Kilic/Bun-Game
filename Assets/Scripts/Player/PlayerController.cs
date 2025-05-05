@@ -15,12 +15,14 @@ public class PlayerController : Singleton<PlayerController>
     float dashSpeed = 5f;
     bool isDashing = false;
     private float defaultMoveSpeed;
+    Knockback knockback;
     protected override void Awake()
     {
         base.Awake();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultMoveSpeed = MoveSpeed;
+        knockback = GetComponent<Knockback>();
     }
     void Update()
     {
@@ -31,9 +33,16 @@ public class PlayerController : Singleton<PlayerController>
     }
     void FixedUpdate()
     {
-        gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(moveX, moveY);
+        Move();
         PlayerDirection();
     }
+
+    private void Move()
+    {
+        if(knockback.GettingKnockbacked) return;
+        gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(moveX, moveY);
+    }
+
     public GameObject GetWeaponCollider()
     {
         return WeaponCollider;
