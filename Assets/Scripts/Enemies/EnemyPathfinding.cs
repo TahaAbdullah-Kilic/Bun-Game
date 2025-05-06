@@ -23,7 +23,7 @@ public class EnemyPathfinding : MonoBehaviour
     {
         moveDirection = newDirection;
         if(moveDirection.x < 0) spriteRenderer.flipX = true;
-        else spriteRenderer.flipX = false;
+        else if(moveDirection.x > 0) spriteRenderer.flipX = false;
     }
     public void StopMoving()
     {

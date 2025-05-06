@@ -45,7 +45,7 @@ public class Projectile : MonoBehaviour
             }
             else if(enemyHealth && !IsEnemyProjectile)
             {
-                return;
+                ProjectileDestroy();
             }
             else if(indestructible)
             {

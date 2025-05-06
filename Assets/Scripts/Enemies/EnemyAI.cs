@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
         Attacking
     }
     [SerializeField] float roamMoveTime = 2f;
-    [SerializeField] float attackRange = 5f;
+    [SerializeField] float attackRange = 0f;
     [SerializeField] MonoBehaviour EnemyType;
     [SerializeField] float timeBetweenAttacks = 1f;
     [SerializeField] bool StopMovingWhenAttacking = false;

@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damageAmount, Transform hitTransform)
     {
+        ScreenShakeManager.Instance.ShakeScreen();
         if(!iframe.GetcanTakeDamage()) return;
         iframe.SetcanTakeDamage(false);
         currentHealth -= damageAmount;
