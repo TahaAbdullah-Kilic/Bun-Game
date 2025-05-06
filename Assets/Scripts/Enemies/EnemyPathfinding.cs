@@ -25,4 +25,8 @@ public class EnemyPathfinding : MonoBehaviour
         if(moveDirection.x < 0) spriteRenderer.flipX = true;
         else spriteRenderer.flipX = false;
     }
+    public void StopMoving()
+    {
+        moveDirection = Vector3.zero;
+    }
 }

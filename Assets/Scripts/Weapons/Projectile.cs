@@ -13,16 +13,23 @@ public class Projectile : MonoBehaviour
     }
     void Update()
     {
-        UpdateProjectileRange();
         DetectDistance();
     }
-    public void UpdateWeaponInfo(float projectileRange)
+    private void FixedUpdate() 
+    {
+        MoveProjectile();
+    }
+    public void UpdateProjectileRange(float projectileRange)
     {
         this.projectileRange = projectileRange;
     }
-    void UpdateProjectileRange()
+    void MoveProjectile()
     {
         transform.Translate(Vector3.right * Time.deltaTime * MoveSpeed);
+    }
+    public void UpdateProjectileSpeed(float ProjectileSpeed)
+    {
+        MoveSpeed = ProjectileSpeed;
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -33,12 +40,27 @@ public class Projectile : MonoBehaviour
         {
             if(player && IsEnemyProjectile)
             {
-                player.TakeDamage(1, transform);
+                player?.TakeDamage(1, transform);
+                ProjectileDestroy();
             }
-            Destroy(gameObject);
-            Instantiate(ParticleOnHitVFX, transform.position, transform.rotation);
+            else if(enemyHealth && !IsEnemyProjectile)
+            {
+                return;
+            }
+            else if(indestructible)
+            {
+                ProjectileDestroy();
+            }
+            
         }
     }
+
+    private void ProjectileDestroy()
+    {
+        Instantiate(ParticleOnHitVFX, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+
     void DetectDistance()
     {
         if(Vector3.Distance(transform.position, startPosition) > projectileRange) Destroy(gameObject);
