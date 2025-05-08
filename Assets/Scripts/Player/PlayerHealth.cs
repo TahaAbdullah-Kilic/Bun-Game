@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : Singleton<PlayerHealth>
 {
     [SerializeField] float MaxHealth = 30;
     [SerializeField] float KnockbackAmount = 10f;
@@ -9,8 +9,10 @@ public class PlayerHealth : MonoBehaviour
     Knockback knockback;
     Flash flash;
     IFrame iframe;
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         flash = GetComponent<Flash>();
         knockback = GetComponent<Knockback>();
         iframe = GetComponent<IFrame>();
@@ -29,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damageAmount, Transform hitTransform)
     {
-        ScreenShakeManager.Instance.ShakeScreen();
+        //ScreenShakeManager.Instance.ShakeScreen();
         if(!iframe.GetcanTakeDamage()) return;
         iframe.SetcanTakeDamage(false);
         currentHealth -= damageAmount;
@@ -37,5 +39,8 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(iframe.TakeDamageRoutine());
         StartCoroutine(flash.FlashRoutine());
     }
-    
+    public void HealPlayer()
+    {
+        currentHealth += 1;
+    }
 }
