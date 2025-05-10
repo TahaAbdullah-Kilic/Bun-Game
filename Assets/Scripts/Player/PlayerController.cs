@@ -7,12 +7,13 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] TrailRenderer trailRenderer;
     [SerializeField] GameObject WeaponCollider;
     [SerializeField] Transform AttackAnimationSpawnPoint;
+    [SerializeField] float DashSpeed = 2.5f;
     public bool FacingRight { get { return facingRight; } }
     Animator animator;
     float moveX, moveY;
     SpriteRenderer spriteRenderer;
     bool facingRight = true;
-    float dashSpeed = 5f;
+    
     bool isDashing = false;
     private float defaultMoveSpeed;
     Knockback knockback;
@@ -21,8 +22,12 @@ public class PlayerController : Singleton<PlayerController>
         base.Awake();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        defaultMoveSpeed = MoveSpeed;
         knockback = GetComponent<Knockback>();
+    }
+    void Start()
+    {
+        defaultMoveSpeed = MoveSpeed;
+        ActiveInventorySlot.Instance.EquipStartingWeapon();
     }
     void Update()
     {
@@ -30,6 +35,7 @@ public class PlayerController : Singleton<PlayerController>
         moveX = Input.GetAxis("Horizontal") * MoveSpeed;
         moveY = Input.GetAxis("Vertical") * MoveSpeed;
         if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
+        if (Input.GetKeyDown(KeyCode.Escape)) QuitGame();
     }
     void FixedUpdate()
     {
@@ -39,7 +45,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Move()
     {
-        if(knockback.GettingKnockbacked) return;
+        if(knockback.GettingKnockbacked || PlayerHealth.Instance.IsDead) return;
         gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(moveX, moveY);
     }
 
@@ -73,11 +79,12 @@ public class PlayerController : Singleton<PlayerController>
     }
     void Dash()
     {
-        if(!isDashing)
+        if(!isDashing && Stamina.Instance.CurrentStamina > 0)
         {
+            Stamina.Instance.UseStamina();
             isDashing = true;
             trailRenderer.emitting = true;
-            MoveSpeed *= dashSpeed;
+            MoveSpeed *= DashSpeed;
             StartCoroutine(DashRoutine());
         }
     }
@@ -90,5 +97,9 @@ public class PlayerController : Singleton<PlayerController>
         trailRenderer.emitting = false;
         yield return new WaitForSeconds(dashCooldown);
         isDashing = false;
+    }
+    void QuitGame()
+    {
+        Application.Quit();
     }
 }

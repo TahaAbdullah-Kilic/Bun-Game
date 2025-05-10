@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 5598938703682953278}
   - component: {fileID: 7722474820233715277}
   - component: {fileID: 2909544553672832761}
+  - component: {fileID: 4820533456357481488}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -477,6 +478,7 @@ MonoBehaviour:
   trailRenderer: {fileID: 5480685597149602754}
   WeaponCollider: {fileID: 97073875910792150, guid: fe3977ad92a89b548810bda1855b0b0d, type: 3}
   AttackAnimationSpawnPoint: {fileID: 798977330560095836}
+  DashSpeed: 4
 --- !u!70 &3297292796043214825
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -526,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1973a024641aa704eb7d910d4f5c039c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 30
+  MaxHealth: 10
   KnockbackAmount: 10
 --- !u!114 &5598938703682953278
 MonoBehaviour:
@@ -568,3 +570,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IframeTime: 1
+--- !u!114 &4820533456357481488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360971817673200843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa4c405286d5d14caca2457a6346053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxStamina: 3
+  FullStaminaImage: {fileID: -7799045602948881875, guid: b00bc9b7e81b468488ee775a008e7956, type: 3}
+  EmptyStaminaImage: {fileID: 4634418647378881802, guid: 463e16ba16595bf4e87f6ba6229950bc, type: 3}
+  TimeBetweenStaminaRefresh: 3

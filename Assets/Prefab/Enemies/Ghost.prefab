@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 5579136032953356401}
   - component: {fileID: 8242716160125356980}
   - component: {fileID: 9177913877152710641}
+  - component: {fileID: -2173900532534253013}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -192,6 +193,7 @@ MonoBehaviour:
   attackRange: 5
   EnemyType: {fileID: 9177913877152710641}
   timeBetweenAttacks: 1
+  StopMovingWhenAttacking: 0
 --- !u!114 &1974927876631826208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a1ccc132a0e2c499ef391c5a408d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 30
+  MaxHealth: 15
   DeathVFXPrefab: {fileID: 8531086396327909191, guid: 684a4ba92a0876c448f4808d06d07680, type: 3}
   KnockbackAmount: 10
 --- !u!114 &6351103790506047222
@@ -293,6 +295,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 4792920267549897130, guid: f1bac6b63b4e486438fff44026b80585, type: 3}
+  BulletSpeed: 10
+  BurstCount: 1
+  ProjectilesPerBurst: 1
+  AngleSpread: 0
+  TimeBetweenBurstAttacks: 0.75
+  TimeBetweenAttacks: 1
+  DistanceFromTransform: 0.1
+  stagger: 0
+  oscillate: 0
+--- !u!114 &-2173900532534253013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090410031702097879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23975c1186dd27747876804bc1e27255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoldCoin: {fileID: 67386773713783568, guid: e4083c4cb3fc04243ba2aee77356ed04, type: 3}
+  HeartPickup: {fileID: 67386773713783568, guid: 28fbd13dd56111d4dab30a5781d639dc, type: 3}
+  StaminaPickup: {fileID: 67386773713783568, guid: 17c5b020611772b419a0a6db025cb743, type: 3}
 --- !u!1 &2412075432918250069
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class EnemyHealth : MonoBehaviour
     IEnumerator DieRoutine()
     {
         yield return new WaitForSeconds(flash.GetFlashTime());
-        Die();
+        DetechDeath();
     }
     void Awake()
     {
@@ -30,11 +30,12 @@ public class EnemyHealth : MonoBehaviour
         StartCoroutine(flash.FlashRoutine());
         StartCoroutine(DieRoutine());       
     }
-    void Die()
+    void DetechDeath()
     {
         if (currentHealth <= 0)
         {
             Instantiate(DeathVFXPrefab,transform.position, Quaternion.identity);
+            GetComponent<PickupSpawner>().DropItems();
             Destroy(gameObject);
         } 
     }

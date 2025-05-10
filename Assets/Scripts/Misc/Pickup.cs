@@ -37,8 +37,7 @@ public class Pickup : MonoBehaviour
         }
         else
         {
-            moveDirection = Vector3.zero;
-            MoveSpeed = 0f;
+            moveDirection = (playerPosition - transform.position).normalized;
         }
     }
     void FixedUpdate()
@@ -77,13 +76,15 @@ public class Pickup : MonoBehaviour
         switch(pickupType)
         {
             case PickupType.GoldCoin:
-                Debug.Log("Gold");
+                EconomyManager.Instance.UpdateCurrentGold();
                 break;
             case PickupType.HealthPickup:
                 PlayerHealth.Instance.HealPlayer();
                 break;
             case PickupType.StaminaPickup:
-                Debug.Log("stamina");
+                Stamina.Instance.RefreshStamina();
+                break;
+            default:
                 break;
         }
     }

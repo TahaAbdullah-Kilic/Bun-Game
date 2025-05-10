@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 8638619436017571257}
   - component: {fileID: 2411401074241071944}
   - component: {fileID: 838520218866256413}
+  - component: {fileID: 7659124596255997395}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -291,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a1ccc132a0e2c499ef391c5a408d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 30
+  MaxHealth: 10
   DeathVFXPrefab: {fileID: 8531086396327909191, guid: 66547cc49837ea944962cc5466a2bcb9, type: 3}
   KnockbackAmount: 10
 --- !u!114 &1828859669874940542
@@ -367,3 +368,18 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_SortAtRoot: 0
+--- !u!114 &7659124596255997395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6603433318431471653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23975c1186dd27747876804bc1e27255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoldCoin: {fileID: 67386773713783568, guid: e4083c4cb3fc04243ba2aee77356ed04, type: 3}
+  HeartPickup: {fileID: 67386773713783568, guid: 28fbd13dd56111d4dab30a5781d639dc, type: 3}
+  StaminaPickup: {fileID: 67386773713783568, guid: 17c5b020611772b419a0a6db025cb743, type: 3}

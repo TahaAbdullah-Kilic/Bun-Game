@@ -1,13 +1,9 @@
 using System;
 using UnityEngine;
 
-public class ActiveInventorySlot : MonoBehaviour
+public class ActiveInventorySlot : Singleton<ActiveInventorySlot>
 {
     int activeInventorySlotIndex;
-    void Start()
-    {
-        ToggleActiveHighlight(0);
-    }
     void Update()
     {
         for (int i = 0; i < 10; i++)
@@ -17,6 +13,10 @@ public class ActiveInventorySlot : MonoBehaviour
                 ToggleActiveSlot(i);
             }
         }
+    }
+    public void EquipStartingWeapon()
+    {
+        ToggleActiveHighlight(0);
     }
     void ToggleActiveSlot(int IndexNumber)
     {
@@ -35,6 +35,7 @@ public class ActiveInventorySlot : MonoBehaviour
     void ChangeActiveWeapon()
     {
         InventorySlot inventorySlot = transform.GetChild(activeInventorySlotIndex).GetComponentInChildren<InventorySlot>();
+        if(PlayerHealth.Instance.IsDead) return;
 
         if(ActiveWeapon.Instance.CurrentActiveWeapon != null) Destroy(ActiveWeapon.Instance.CurrentActiveWeapon.gameObject);
 
