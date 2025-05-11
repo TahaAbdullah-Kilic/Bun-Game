@@ -16,6 +16,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
     const string HEALTH_BAR_TEXT = "Health Bar";
     const string VILLAGE_TEXT = "Starter_Village";
     Animator animator;
+    AudioManager audioManager;
     protected override void Awake()
     {
         base.Awake();
@@ -24,6 +25,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
         knockback = GetComponent<Knockback>();
         iframe = GetComponent<IFrame>();
         animator = GetComponent<Animator>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     void Start()
     {
@@ -60,7 +62,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
             currentHealth = 0;
             DeathAnimation();
             StartCoroutine(DeathLoadSceneRoutine());
-
+            audioManager.PlaySFX(audioManager.Death);
         }
     }
     IEnumerator DeathLoadSceneRoutine()
@@ -69,6 +71,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
         Destroy(gameObject);
         Stamina.Instance.ReplenishStaminaOnDeath();
         SceneManager.LoadScene(VILLAGE_TEXT);
+        audioManager.PlayMusic();
     }
     public void HealPlayer()
     {
