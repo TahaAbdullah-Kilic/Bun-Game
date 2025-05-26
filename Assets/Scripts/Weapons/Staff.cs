@@ -32,10 +32,10 @@ public class Staff : MonoBehaviour, IWeapon
     void MouseFollowWithOnset()
     {
         Vector3 mousePosition = Input.mousePosition;
-        //Vector3 playerPosition = PlayerController.Instance.transform.position;
+        Vector3 playerPosition = PlayerController.Instance.transform.position;
         Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(PlayerController.Instance.transform.position);
-        //float angle = Mathf.Atan2(mousePosition.y - playerPosition.y, MathF.Abs(mousePosition.x - playerPosition.x)) * Mathf.Rad2Deg;
-        float angle = Mathf.Atan2(mousePosition.y,mousePosition.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(mousePosition.y - playerPosition.y, Mathf.Abs(mousePosition.x - playerPosition.x)) * Mathf.Rad2Deg;
+        //float angle = Mathf.Atan2(mousePosition.y,mousePosition.x) * Mathf.Rad2Deg;
         if (mousePosition.x < playerScreenPoint.x)
         {
             ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, -180, angle);
